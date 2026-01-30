@@ -1,0 +1,61 @@
+{
+	"name": "Java Development Container",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "devcontainer",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+	// Features to add to the dev container. More info: https://containers.dev/features
+	"features": {
+		"ghcr.io/devcontainers/features/java:1": {
+			"version": "latest",
+			"installMaven": "true",
+			"installGradle": "true"
+		},
+		"ghcr.io/devcontainers/features/node:1": {
+			"version": "24"
+		},
+		"ghcr.io/devcontainers/features/python:1": {
+			"version": "3.14"
+		},
+		"ghcr.io/devcontainers/features/git:1": {
+			"version": "latest"
+		}
+	},
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"vscjava.vscode-java-pack",
+				"vscjava.vscode-maven",
+				"vscjava.vscode-gradle",
+				"dbaeumer.vscode-eslint",
+				"esbenp.prettier-vscode",
+				"ms-python.python",
+				"ms-python.vscode-pylance"
+			],
+			"settings": {
+				"java.configuration.updateBuildConfiguration": "automatic",
+				"editor.formatOnSave": true,
+				"editor.defaultFormatter": "esbenp.prettier-vscode",
+				"[java]": {
+					"editor.defaultFormatter": "redhat.java"
+				},
+				"[python]": {
+					"editor.defaultFormatter": "ms-python.black-formatter"
+				}
+			}
+		}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// Note: Port 5000 is mapped to 5001 on the host due to macOS using port 5000
+	"forwardPorts": [8080, 3000],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "java -version && node --version && python --version",
+
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
+}
+
