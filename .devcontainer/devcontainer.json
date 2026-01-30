@@ -19,7 +19,8 @@
 		},
 		"ghcr.io/devcontainers/features/git:1": {
 			"version": "latest"
-		}
+		},
+		"ghcr.io/devcontainer-community/devcontainer-features/opencode.ai:1": {}
 	},
 
 	// Configure tool-specific properties.
@@ -53,7 +54,7 @@
 	"forwardPorts": [8080, 3000],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "java -version && node --version && python --version",
+	"postCreateCommand": "npm install -g @anthropic-ai/claude-code && java -version && node --version && python --version && claude --version",
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
