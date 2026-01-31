@@ -32,6 +32,17 @@ ARG USER_GID=$USER_UID
 # Set the default shell to bash
 SHELL ["/bin/bash", "-c"]
 
+# Install Node.js (needed for npm before devcontainer features apply)
+RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - && \
+    apt-get install -y nodejs && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install AI tools globally
+RUN npm install -g @anthropic-ai/claude-code && \
+    npm install -g @augmentcode/auggie && \
+    npm install -g @google/gemini-cli && \
+    npm install -g opencode-ai
+
 # Create workspace directory
 RUN mkdir -p /workspaces/devcontainer && chown -R ${USERNAME}:${USERNAME} /workspaces
 

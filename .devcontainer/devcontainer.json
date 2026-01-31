@@ -7,7 +7,7 @@
 	// Features to add to the dev container. More info: https://containers.dev/features
 	"features": {
 		"ghcr.io/devcontainers/features/java:1": {
-			"version": "latest",
+			"version": "25",
 			"installMaven": "true",
 			"installGradle": "true"
 		},
@@ -19,8 +19,7 @@
 		},
 		"ghcr.io/devcontainers/features/git:1": {
 			"version": "latest"
-		},
-		"ghcr.io/devcontainer-community/devcontainer-features/opencode.ai:1": {}
+		}
 	},
 
 	// Configure tool-specific properties.
@@ -53,8 +52,8 @@
 	// Note: Port 5000 is mapped to 5001 on the host due to macOS using port 5000
 	"forwardPorts": [8080, 3000],
 
-	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "npm install -g @anthropic-ai/claude-code @augmentcode/auggie && java -version && node --version && python --version && claude --version && auggie --version",
+	// Verify installations after container is created
+	"postCreateCommand": "echo '✓ Verifying installations...' && java -version && node --version && python --version && claude --version && auggie --version && gemini --version && opencode --version",
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
