@@ -10,24 +10,29 @@ update_npm_tools() {
     echo "Updating npm tools..."
     echo ""
 
-    echo "[1/4] Updating Claude Code..."
+    echo "[1/5] Updating Claude Code..."
     npm update -g @anthropic-ai/claude-code 2>&1 | grep -v "npm WARN" || npm install -g @anthropic-ai/claude-code 2>&1 | grep -v "npm WARN"
     echo "✓ Claude Code updated"
 
     echo ""
-    echo "[2/4] Updating Auggie CLI..."
+    echo "[2/5] Updating Auggie CLI..."
     npm update -g @augmentcode/auggie 2>&1 | grep -v "npm WARN" || npm install -g @augmentcode/auggie 2>&1 | grep -v "npm WARN"
     echo "✓ Auggie CLI updated"
 
     echo ""
-    echo "[3/4] Updating OpenCode..."
+    echo "[3/5] Updating OpenCode..."
     npm update -g opencode-ai 2>&1 | grep -v "npm WARN" || npm install -g opencode-ai 2>&1 | grep -v "npm WARN"
     echo "✓ OpenCode updated"
 
     echo ""
-    echo "[4/4] Updating Gemini CLI..."
+    echo "[4/5] Updating Gemini CLI..."
     npm update -g @google/gemini-cli 2>&1 | grep -v "npm WARN" || npm install -g @google/gemini-cli 2>&1 | grep -v "npm WARN"
     echo "✓ Gemini CLI updated"
+
+    echo ""
+    echo "[5/5] Updating Kilo CLI..."
+    npm update -g @kilocode/cli 2>&1 | grep -v "npm WARN" || npm install -g @kilocode/cli 2>&1 | grep -v "npm WARN"
+    echo "✓ Kilo CLI updated"
 }
 
 update_ngrok() {
@@ -97,6 +102,12 @@ if command -v gemini &> /dev/null; then
     echo "✓ Gemini CLI: $(gemini --version 2>/dev/null || echo "installed")"
 else
     echo "✗ Gemini CLI: not found"
+fi
+
+if command -v kilo &> /dev/null; then
+    echo "✓ Kilo CLI: $(kilo --version 2>/dev/null || echo "installed")"
+else
+    echo "✗ Kilo CLI: not found"
 fi
 
 if command -v ngrok &> /dev/null; then

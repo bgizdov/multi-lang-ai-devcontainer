@@ -26,7 +26,7 @@ echo "=========================================="
 
 # Install Claude Code
 echo ""
-echo "[1/3] Installing Claude Code..."
+echo "[1/4] Installing Claude Code..."
 if sudo npm install -g @anthropic-ai/claude-code 2>&1 | grep -v "npm WARN"; then
     echo "✓ Claude Code installed"
 else
@@ -35,7 +35,7 @@ fi
 
 # Install Auggie CLI
 echo ""
-echo "[2/3] Installing Auggie CLI..."
+echo "[2/4] Installing Auggie CLI..."
 if sudo npm install -g @augmentcode/auggie 2>&1 | grep -v "npm WARN"; then
     echo "✓ Auggie CLI installed"
 else
@@ -44,7 +44,7 @@ fi
 
 # Install OpenCode
 echo ""
-echo "[3/4] Installing OpenCode..."
+echo "[3/5] Installing OpenCode..."
 if sudo npm install -g opencode-ai 2>&1 | grep -v "npm WARN"; then
     echo "✓ OpenCode installed"
 else
@@ -53,11 +53,20 @@ fi
 
 # Install Gemini CLI
 echo ""
-echo "[4/4] Installing Gemini CLI..."
+echo "[4/5] Installing Gemini CLI..."
 if sudo npm install -g @google/gemini-cli 2>&1 | grep -v "npm WARN"; then
     echo "✓ Gemini CLI installed"
 else
     echo "✗ Failed to install Gemini CLI"
+fi
+
+# Install Kilo CLI
+echo ""
+echo "[5/5] Installing Kilo CLI..."
+if sudo npm install -g @kilocode/cli 2>&1 | grep -v "npm WARN"; then
+    echo "✓ Kilo CLI installed"
+else
+    echo "✗ Failed to install Kilo CLI"
 fi
 
 # Verify installations
@@ -91,6 +100,12 @@ else
     echo "✗ Gemini CLI: not found"
 fi
 
+if command -v kilo &> /dev/null; then
+    echo "✓ Kilo CLI: $(which kilo)"
+else
+    echo "✗ Kilo CLI: not found"
+fi
+
 echo ""
 echo "=========================================="
 echo "Setup Complete!"
@@ -101,6 +116,7 @@ echo "  - claude    (Anthropic's Claude Code)"
 echo "  - auggie    (Augment Code CLI)"
 echo "  - opencode  (OpenCode AI)"
 echo "  - gemini    (Google's Gemini CLI)"
+echo "  - kilo      (Kilo CLI)"
 echo ""
 
 # Mark as installed

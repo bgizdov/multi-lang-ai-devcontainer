@@ -51,7 +51,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - && \
 RUN npm install -g @anthropic-ai/claude-code && \
     npm install -g @augmentcode/auggie && \
     npm install -g @google/gemini-cli && \
-    npm install -g opencode-ai
+    npm install -g opencode-ai && \
+    npm install -g @kilocode/cli
 
 # Create workspace directory
 RUN mkdir -p /workspaces/devcontainer && chown -R ${USERNAME}:${USERNAME} /workspaces
