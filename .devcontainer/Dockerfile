@@ -18,10 +18,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     && rm -rf /var/lib/apt/lists/*
 
-# Install ngrok
-RUN curl -fsSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc | gpg --dearmor -o /usr/share/keyrings/ngrok.gpg && \
-    echo "deb [signed-by=/usr/share/keyrings/ngrok.gpg] https://ngrok-agent.s3.amazonaws.com/apt stable main" | tee /etc/apt/sources.list.d/ngrok.list && \
-    apt-get update && apt-get install -y ngrok && rm -rf /var/lib/apt/lists/*
+
 
 # Install cloudflared
 RUN wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O /usr/local/bin/cloudflared && \
@@ -52,7 +49,8 @@ RUN npm install -g @anthropic-ai/claude-code && \
     npm install -g @augmentcode/auggie && \
     npm install -g @google/gemini-cli && \
     npm install -g opencode-ai && \
-    npm install -g @kilocode/cli
+    npm install -g @kilocode/cli && \
+    npm install -g ngrok
 
 # Install Python AI tools
 RUN pip install vicoa
@@ -60,8 +58,11 @@ RUN pip install vicoa
 # Install Kimi Code
 RUN curl -L code.kimi.com/install.sh | bash
 
-# Install Kiro Code
-RUN curl -fsSL https://cli.kiro.dev/install | bash
+# Install Kiro CLI
+RUN curl -fsSL https://desktop-release.q.us-east-1.amazonaws.com/latest/kiro-cli-linux.tar.gz -o /tmp/kiro.tar.gz && \
+    tar -xzf /tmp/kiro.tar.gz -C /usr/local/bin && \
+    chmod +x /usr/local/bin/kiro-cli /usr/local/bin/kiro-cli-chat /usr/local/bin/kiro-cli-term && \
+    rm -f /tmp/kiro.tar.gz
 
 
 

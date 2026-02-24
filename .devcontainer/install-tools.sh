@@ -26,6 +26,8 @@ echo ""
 install_or_update_npm_tool "Gemini CLI" "@google/gemini-cli"
 echo ""
 install_or_update_npm_tool "Kilo CLI" "@kilocode/cli"
+echo ""
+install_or_update_npm_tool "ngrok" "ngrok"
 
 echo ""
 echo "Installing/updating Python AI tools..."
@@ -38,9 +40,14 @@ curl -L code.kimi.com/install.sh | bash 2>&1 | grep -v "curl"
 echo "✓ Kimi Code done"
 
 echo ""
-echo "Installing/updating Kiro Code..."
-curl -fsSL https://cli.kiro.dev/install | bash 2>&1 | grep -v "curl"
-echo "✓ Kiro Code done"
+echo "Installing/updating Kiro CLI..."
+if [ ! -f ~/.local/bin/kiro-cli ]; then
+    curl -fsSL https://desktop-release.q.us-east-1.amazonaws.com/latest/kiro-cli-linux.tar.gz -o /tmp/kiro.tar.gz && \
+    tar -xzf /tmp/kiro.tar.gz -C ~/.local/bin && \
+    chmod +x ~/.local/bin/kiro-cli ~/.local/bin/kiro-cli-chat ~/.local/bin/kiro-cli-term && \
+    rm -f /tmp/kiro.tar.gz
+fi
+echo "✓ Kiro CLI done"
 
 echo ""
 echo "=========================================="
@@ -76,7 +83,7 @@ verify_tool "Gemini CLI" "gemini"
 verify_tool "Kilo CLI" "kilo"
 verify_tool "Vicoa" "vicoa"
 verify_tool "Kimi Code" "kimi"
-verify_tool "Kiro Code" "kiro"
+verify_tool "Kiro CLI" "kiro-cli"
 
 echo ""
 echo "Tunneling Tools:"
