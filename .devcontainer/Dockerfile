@@ -51,7 +51,8 @@ RUN npm install -g @anthropic-ai/claude-code && \
     npm install -g opencode-ai && \
     npm install -g @kilocode/cli && \
     npm install -g ngrok && \
-    npm install -g @openai/codex
+    npm install -g @openai/codex && \
+    npm install -g cline
 
 # Install Python AI tools
 RUN pip install vicoa
