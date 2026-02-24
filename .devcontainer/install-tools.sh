@@ -2,55 +2,45 @@
 
 echo ""
 echo "=========================================="
-echo "AI Tools Installer"
+echo "AI Tools Installer & Updater"
 echo "=========================================="
 echo ""
 
-echo ""
-echo "Installing AI CLI Tools..."
-echo "=========================================="
-
-install_npm_tool() {
+install_or_update_npm_tool() {
     local name=$1
     local package=$2
-    echo ""
-    echo "Installing $name..."
-    if sudo npm install -g $package 2>&1 | grep -v "npm WARN"; then
-        echo "✓ $name installed"
-    else
-        echo "✗ Failed to install $name"
-    fi
+    echo "Installing/updating $name..."
+    npm update -g $package 2>&1 | grep -v "npm WARN" || npm install -g $package 2>&1 | grep -v "npm WARN"
+    echo "✓ $name done"
 }
 
-install_npm_tool "Claude Code" "@anthropic-ai/claude-code"
-install_npm_tool "Auggie CLI" "@augmentcode/auggie"
-install_npm_tool "OpenCode" "opencode-ai"
-install_npm_tool "Gemini CLI" "@google/gemini-cli"
-install_npm_tool "Kilo CLI" "@kilocode/cli"
+echo "Installing/updating npm tools..."
+echo ""
+
+install_or_update_npm_tool "Claude Code" "@anthropic-ai/claude-code"
+echo ""
+install_or_update_npm_tool "Auggie CLI" "@augmentcode/auggie"
+echo ""
+install_or_update_npm_tool "OpenCode" "opencode-ai"
+echo ""
+install_or_update_npm_tool "Gemini CLI" "@google/gemini-cli"
+echo ""
+install_or_update_npm_tool "Kilo CLI" "@kilocode/cli"
 
 echo ""
-echo "Installing Python AI tools..."
-if pip install vicoa 2>&1 | grep -v "WARNING"; then
-    echo "✓ Vicoa installed"
-else
-    echo "✗ Failed to install Vicoa"
-fi
+echo "Installing/updating Python AI tools..."
+pip install vicoa --upgrade 2>&1 | grep -v "WARNING" || pip install vicoa 2>&1 | grep -v "WARNING"
+echo "✓ Vicoa done"
 
 echo ""
-echo "Installing Kimi Code..."
-if curl -L code.kimi.com/install.sh | bash 2>&1 | grep -v "curl"; then
-    echo "✓ Kimi Code installed"
-else
-    echo "✗ Failed to install Kimi Code"
-fi
+echo "Installing/updating Kimi Code..."
+curl -L code.kimi.com/install.sh | bash 2>&1 | grep -v "curl"
+echo "✓ Kimi Code done"
 
 echo ""
-echo "Installing Kiro Code..."
-if curl -fsSL https://cli.kiro.dev/install | bash 2>&1 | grep -v "curl"; then
-    echo "✓ Kiro Code installed"
-else
-    echo "✗ Failed to install Kiro Code"
-fi
+echo "Installing/updating Kiro Code..."
+curl -fsSL https://cli.kiro.dev/install | bash 2>&1 | grep -v "curl"
+echo "✓ Kiro Code done"
 
 echo ""
 echo "=========================================="
@@ -96,6 +86,6 @@ verify_tool "cloudflared" "cloudflared"
 
 echo ""
 echo "=========================================="
-echo "Installation Complete!"
+echo "Complete!"
 echo "=========================================="
 echo ""
