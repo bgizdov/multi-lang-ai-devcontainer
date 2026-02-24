@@ -17,7 +17,9 @@ install_or_update_npm_tool() {
 echo "Installing/updating npm tools..."
 echo ""
 
-install_or_update_npm_tool "Claude Code" "@anthropic-ai/claude-code"
+echo "Installing/updating Claude Code..."
+curl -fsSL https://claude.ai/install.sh | bash 2>&1 | grep -v "curl"
+echo "✓ Claude Code done"
 echo ""
 install_or_update_npm_tool "Auggie CLI" "@augmentcode/auggie"
 echo ""
