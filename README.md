@@ -6,7 +6,7 @@ A comprehensive development container template that provides a multi-language de
 
 This project sets up a containerized development workspace with support for:
 - **Languages**: Java, JavaScript/Node.js, Python
-- **AI Tools**: Claude Code, Auggie, OpenCode, Gemini CLI
+- **AI Tools**: 13+ AI coding assistants pre-installed
 - **Container Runtime**: Docker & Docker Compose
 - **IDE Integration**: VS Code Dev Containers
 
@@ -20,10 +20,27 @@ Perfect for developers who want a consistent, reproducible development environme
 - **Python 3.14** for Python development
 
 ### AI Coding Assistants
-- **Claude Code** - Anthropic's Claude Code CLI
-- **Auggie** - Augment Code's AI assistant
-- **OpenCode AI** - OpenCode's AI coding tool
-- **Gemini CLI** - Google's Gemini AI tool
+
+| Tool | Command | Package | Description |
+|------|---------|---------|-------------|
+| Claude Code | `claude` | `@anthropic-ai/claude-code` | Anthropic's AI assistant |
+| Auggie | `auggie` | `@augmentcode/auggie` | Augment Code's AI assistant |
+| Gemini CLI | `gemini` | `@google/gemini-cli` | Google's Gemini AI tool |
+| OpenCode | `opencode` | `opencode-ai` | OpenCode AI coding tool |
+| Kilo CLI | `kilo` | `@kilocode/cli` | Kilo AI assistant |
+| Codex CLI | `codex` | `@openai/codex` | OpenAI's Codex CLI |
+| Cline | `cline` | `cline` | AI coding assistant |
+| Crush | `crush` | `@charmland/crush` | Charmland's AI tool |
+| Qwen Code | `qwen` | `@qwen-code/qwen-code` | Alibaba's Qwen AI |
+| Vicoa | `vicoa` | `pip install vicoa` | Python AI assistant |
+| Aider | `aider` | `pip install aider-install` | AI pair programming |
+| Kimi Code | `kimi` | `curl -L code.kimi.com/install.sh` | Kimi AI assistant |
+| Kiro CLI | `kiro-cli` | Manual install | AWS Q CLI (Kiro) |
+| Plandex | `plandex` | `curl -sL https://plandex.ai/install.sh` | AI task manager |
+
+### Tunneling Tools
+- **ngrok** - Secure tunneling (via npm)
+- **cloudflared** - Cloudflare tunneling
 
 ### VS Code Extensions
 - Java Extension Pack
@@ -39,7 +56,6 @@ Perfect for developers who want a consistent, reproducible development environme
 - curl, wget
 - Build tools (build-essential)
 - Zip/unzip utilities
-- Code formatters (Prettier, language-specific formatters)
 
 ## Quick Start
 
@@ -69,70 +85,89 @@ code .
 The following ports are automatically forwarded from container to host:
 - **8080** - Java/Spring Boot applications
 - **3000** - Node.js/React development servers
-- **5000** - Python Flask/Django applications
 
 ## Installation & Setup
 
 ### Automatic Setup
 
-Run the interactive setup script to install AI tools:
+Install or update all tools:
 ```bash
-./install-ai-tools.sh
+.devcontainer/install-tools.sh
 ```
 
-Or use the non-interactive version for automated deployments:
+### Verify Installation
+
+Run verification:
 ```bash
-./setup-ai-tools.sh
+.devcontainer/install-tools.sh
 ```
 
-### Manual AI Tools Installation
-
-Install individual tools as needed:
-
+Or check individually:
 ```bash
-# Claude Code
-npm install -g @anthropic-ai/claude-code
-
-# Auggie
-npm install -g @augmentcode/auggie
-
-# OpenCode AI
-npm install -g opencode-ai
-
-# Gemini CLI
-npm install -g @google/gemini-cli
-```
-
-## Verifying Installation
-
-Check that all tools are correctly installed:
-
-```bash
-# Check Java
-java -version
-mvn -version
-gradle -version
-
-# Check Node.js
-node --version
-npm --version
-
-# Check Python
-python --version
-pip --version
-
-# Check AI tools
-claude-code --version
+# Check all AI tools
+claude --version
 auggie --version
-opencode --version
 gemini --version
+opencode --version
+kilo --version
+codex --version
+cline --version
+crush --version
+qwen --version
+vicoa --version
+aider --version
+kimi --version
+kiro-cli --version
+plandex --version
+
+# Check tunneling
+ngrok --version
+cloudflared --version
 ```
 
 ## Development Workflow
 
-### Using Claude Code
+### Using AI Tools
+
 ```bash
-claude-code <command> [options]
+# Claude Code
+claude
+
+# Auggie
+auggie
+
+# Gemini CLI
+gemini
+
+# OpenCode
+opencode
+
+# Kilo CLI
+kilo
+
+# Codex CLI
+codex
+
+# Cline
+cline
+
+# Crush
+crush
+
+# Qwen Code
+qwen
+
+# Aider
+aider
+
+# Kimi Code
+kimi
+
+# Kiro CLI
+kiro-cli
+
+# Plandex
+plandex
 ```
 
 ### Using Node.js
@@ -153,28 +188,37 @@ mvn clean package
 mvn spring-boot:run
 ```
 
+### Tunneling
+
+```bash
+# ngrok
+ngrok http 8080
+
+# cloudflared
+cloudflared tunnel --url http://localhost:8080
+```
+
 ## Customization
+
+### Adding AI Tools
+
+Edit `.devcontainer/Dockerfile`:
+```dockerfile
+RUN npm install -g @new-package/cli
+```
 
 ### Adding VS Code Extensions
 
-Edit `.devcontainer/devcontainer.json` and add to the `extensions` array:
+Edit `.devcontainer/devcontainer.json`:
 ```json
 "extensions": [
   "ms-vscode.extension-id"
 ]
 ```
 
-### Adding System Packages
-
-Edit `.devcontainer/Dockerfile` to install additional packages:
-```dockerfile
-RUN apt-get update && apt-get install -y \
-    package-name
-```
-
 ### Modifying Runtime Versions
 
-Edit `.devcontainer/devcontainer.json` features section to change language versions:
+Edit `.devcontainer/devcontainer.json`:
 ```json
 "features": {
   "ghcr.io/devcontainers/features/java:1": { "version": "25" },
@@ -213,13 +257,11 @@ docker-compose down
 ```
 .
 ├── .devcontainer/
-│   ├── Dockerfile                 # Container image definition
-│   ├── devcontainer.json          # VS Code dev container config
-│   ├── docker-compose.yml         # Docker Compose setup
-│   ├── README.md                  # Dev container documentation
-│   ├── install-ai-tools.sh        # AI tools installer script
-│   └── setup-ai-tools.sh          # Interactive setup script
-└── README.md                      # This file
+│   ├── Dockerfile              # Container image definition
+│   ├── devcontainer.json       # VS Code dev container config
+│   ├── docker-compose.yml      # Docker Compose setup
+│   └── install-tools.sh       # AI tools installer/updater
+└── README.md                   # This file
 ```
 
 ## Troubleshooting
@@ -230,16 +272,12 @@ docker-compose down
 3. Rebuild: `docker-compose down && docker-compose up -d --build`
 
 ### AI tools not found
-1. Verify installation: Run the setup scripts again
+1. Run install script: `.devcontainer/install-tools.sh`
 2. Check npm global path: `npm list -g`
-3. Verify environment variables are set correctly
+3. Verify PATH includes nvm: `echo $PATH`
 
 ### Port conflicts
-If ports 8080, 3000, or 5000 are in use, modify `docker-compose.yml`:
-```yaml
-ports:
-  - "8081:8080"  # Maps 8081 on host to 8080 in container
-```
+Modify `devcontainer.json` forwardPorts or use custom mapping in docker-compose.
 
 ### VS Code extensions not loading
 1. Rebuild the container
@@ -252,14 +290,6 @@ ports:
 - Use volume mounts for development to avoid rebuilding
 - Cache npm/pip packages between rebuilds
 
-## Contributing
-
-To improve this template:
-1. Test changes in a local container
-2. Update documentation
-3. Commit with clear messages
-4. Submit pull requests
-
 ## License
 
 This project is provided as-is for development purposes.
@@ -270,11 +300,3 @@ This project is provided as-is for development purposes.
 - [Docker Documentation](https://docs.docker.com/)
 - [Claude Code Documentation](https://github.com/anthropics/claude-code)
 - [Dev Containers Specification](https://containers.dev/)
-
-## Support
-
-For issues or questions:
-1. Check the [troubleshooting](#troubleshooting) section
-2. Review `.devcontainer/README.md` for container-specific details
-3. Consult individual tool documentation
-4. Open an issue in the repository
