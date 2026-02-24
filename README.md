@@ -80,6 +80,18 @@ code .
 
 4. Wait for the container to build and start (this may take a few minutes on first run)
 
+### Starting via CLI
+
+Alternatively, use the Dev Containers CLI:
+```bash
+devcontainer up --workspace-folder .
+```
+
+Then attach VS Code:
+```bash
+devcontainer open --workspace-folder .
+```
+
 ### Port Forwarding
 
 The following ports are automatically forwarded from container to host:
