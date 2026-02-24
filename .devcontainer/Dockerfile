@@ -63,8 +63,7 @@ RUN curl -L code.kimi.com/install.sh | bash
 # Install Kiro Code
 RUN curl -fsSL https://cli.kiro.dev/install | bash
 
-# Create workspace directory
-RUN mkdir -p /workspaces/devcontainer && chown -R ${USERNAME}:${USERNAME} /workspaces
+
 
 # Switch to non-root user
 USER ${USERNAME}
