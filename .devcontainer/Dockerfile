@@ -54,6 +54,9 @@ RUN npm install -g @anthropic-ai/claude-code && \
     npm install -g opencode-ai && \
     npm install -g @kilocode/cli
 
+# Install Python AI tools
+RUN pip install vicoa
+
 # Create workspace directory
 RUN mkdir -p /workspaces/devcontainer && chown -R ${USERNAME}:${USERNAME} /workspaces
 
