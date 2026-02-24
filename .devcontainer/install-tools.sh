@@ -107,7 +107,7 @@ verify_tool "Codex CLI" "codex"
 verify_tool "Plandex" "plandex"
 verify_tool "Cline" "cline"
 verify_tool "Crush" "crush"
-verify_tool "Qwen Code" "qwen-code"
+verify_tool "Qwen Code" "qwen"
 
 echo ""
 echo "Tunneling Tools:"
