@@ -55,7 +55,8 @@ RUN npm install -g @anthropic-ai/claude-code && \
     npm install -g @openai/codex && \
     npm install -g cline && \
     npm install -g @charmland/crush && \
-    npm install -g @qwen-code/qwen-code
+    npm install -g @qwen-code/qwen-code && \
+    npm install -g happy-coder
 
 # Install Python AI tools
 RUN pip install vicoa
