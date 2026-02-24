@@ -35,6 +35,11 @@ pip install vicoa --upgrade 2>&1 | grep -v "WARNING" || pip install vicoa 2>&1 |
 echo "✓ Vicoa done"
 
 echo ""
+echo "Installing/updating Aider..."
+python -m pip install aider-install 2>&1 | grep -v "WARNING" && aider-install 2>&1 | grep -v "WARNING"
+echo "✓ Aider done"
+
+echo ""
 echo "Installing/updating Kimi Code..."
 curl -L code.kimi.com/install.sh | bash 2>&1 | grep -v "curl"
 echo "✓ Kimi Code done"
@@ -84,6 +89,7 @@ verify_tool "Kilo CLI" "kilo"
 verify_tool "Vicoa" "vicoa"
 verify_tool "Kimi Code" "kimi"
 verify_tool "Kiro CLI" "kiro-cli"
+verify_tool "Aider" "aider"
 
 echo ""
 echo "Tunneling Tools:"

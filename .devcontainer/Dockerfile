@@ -54,6 +54,7 @@ RUN npm install -g @anthropic-ai/claude-code && \
 
 # Install Python AI tools
 RUN pip install vicoa
+RUN python -m pip install aider-install && aider-install
 
 # Install Kimi Code
 RUN curl -L code.kimi.com/install.sh | bash
