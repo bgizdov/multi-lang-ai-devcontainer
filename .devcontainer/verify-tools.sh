@@ -70,6 +70,13 @@ else
     echo "Kimi Code: not found"
 fi
 
+if command -v kiro &> /dev/null; then
+    echo -n "Kiro Code: "
+    kiro --version 2>&1 | head -1 || echo "installed"
+else
+    echo "Kiro Code: not found"
+fi
+
 echo ""
 echo "Tunneling Tools:"
 echo "----------"
