@@ -66,6 +66,9 @@ RUN curl -fsSL https://desktop-release.q.us-east-1.amazonaws.com/latest/kiro-cli
     chmod +x /usr/local/bin/kiro-cli /usr/local/bin/kiro-cli-chat /usr/local/bin/kiro-cli-term && \
     rm -f /tmp/kiro.tar.gz
 
+# Install Plandex
+RUN curl -sL https://plandex.ai/install.sh | bash
+
 
 
 # Switch to non-root user

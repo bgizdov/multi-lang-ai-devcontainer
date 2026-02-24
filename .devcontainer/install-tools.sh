@@ -57,6 +57,11 @@ fi
 echo "✓ Kiro CLI done"
 
 echo ""
+echo "Installing/updating Plandex..."
+curl -sL https://plandex.ai/install.sh | bash 2>&1 | grep -v "curl"
+echo "✓ Plandex done"
+
+echo ""
 echo "=========================================="
 echo "Verification"
 echo "=========================================="
@@ -93,6 +98,7 @@ verify_tool "Kimi Code" "kimi"
 verify_tool "Kiro CLI" "kiro-cli"
 verify_tool "Aider" "aider"
 verify_tool "Codex CLI" "codex"
+verify_tool "Plandex" "plandex"
 
 echo ""
 echo "Tunneling Tools:"
