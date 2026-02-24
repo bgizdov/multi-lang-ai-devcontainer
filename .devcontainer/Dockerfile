@@ -21,9 +21,11 @@ RUN apt-get update && apt-get install -y \
 
 
 
-# Install cloudflared
-RUN wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O /usr/local/bin/cloudflared && \
-    chmod +x /usr/local/bin/cloudflared && \
+# Install cloudflared via apt
+RUN mkdir -p --mode=0755 /usr/share/keyrings && \
+    curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null && \
+    echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared any main' | tee /etc/apt/sources.list.d/cloudflared.list && \
+    apt-get update && apt-get install -y cloudflared && \
     rm -rf /var/lib/apt/lists/*
 
 # Create a non-root user (vscode user is created by the base image)
