@@ -6,25 +6,6 @@ echo "AI Tools Installer"
 echo "=========================================="
 echo ""
 
-echo "This script will install and verify AI coding assistants:"
-echo "  - Claude Code (Anthropic)"
-echo "  - Auggie CLI (Augment Code)"
-echo "  - OpenCode (Open Source)"
-echo "  - Gemini CLI (Google)"
-echo "  - Kilo CLI"
-echo "  - Vicoa (Python)"
-echo "  - Kimi Code"
-echo "  - Kiro Code"
-echo ""
-read -p "Do you want to install AI tools now? (y/n) " -n 1 -r
-echo ""
-
-if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    echo "Skipping AI tools installation."
-    echo "You can run this script later: .devcontainer/install-tools.sh"
-    exit 0
-fi
-
 echo ""
 echo "Installing AI CLI Tools..."
 echo "=========================================="
