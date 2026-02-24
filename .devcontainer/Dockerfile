@@ -50,7 +50,8 @@ RUN npm install -g @anthropic-ai/claude-code && \
     npm install -g @google/gemini-cli && \
     npm install -g opencode-ai && \
     npm install -g @kilocode/cli && \
-    npm install -g ngrok
+    npm install -g ngrok && \
+    npm install -g @openai/codex
 
 # Install Python AI tools
 RUN pip install vicoa
