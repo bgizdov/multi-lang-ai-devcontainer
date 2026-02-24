@@ -63,6 +63,13 @@ else
     echo "Vicoa: not found"
 fi
 
+if command -v kimi &> /dev/null; then
+    echo -n "Kimi Code: "
+    kimi --version 2>&1 | head -1 || echo "installed"
+else
+    echo "Kimi Code: not found"
+fi
+
 echo ""
 echo "Tunneling Tools:"
 echo "----------"

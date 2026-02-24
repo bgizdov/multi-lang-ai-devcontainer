@@ -57,6 +57,9 @@ RUN npm install -g @anthropic-ai/claude-code && \
 # Install Python AI tools
 RUN pip install vicoa
 
+# Install Kimi Code
+RUN curl -L code.kimi.com/install.sh | bash
+
 # Create workspace directory
 RUN mkdir -p /workspaces/devcontainer && chown -R ${USERNAME}:${USERNAME} /workspaces
 
