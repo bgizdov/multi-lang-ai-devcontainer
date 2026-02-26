@@ -60,9 +60,12 @@ RUN npm install -g @anthropic-ai/claude-code && \
     npm install -g @qwen-code/qwen-code && \
     npm install -g happy-coder
 
+# Install Python
+RUN apt-get update && apt-get install -y python3 python3-pip python3-venv && rm -rf /var/lib/apt/lists/*
+
 # Install Python AI tools
-RUN pip install vicoa
-RUN python -m pip install aider-install && aider-install
+RUN pip3 install vicoa
+RUN pip3 install aider-install && aider-install
 
 # Install Kimi Code
 RUN curl -L code.kimi.com/install.sh | bash
