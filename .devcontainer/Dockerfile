@@ -64,8 +64,8 @@ RUN npm install -g @anthropic-ai/claude-code && \
 RUN apt-get update && apt-get install -y python3 python3-pip python3-venv && rm -rf /var/lib/apt/lists/*
 
 # Install Python AI tools
-RUN pip3 install vicoa
-RUN pip3 install aider-install && aider-install
+RUN pip3 install --break-system-packages vicoa
+RUN pip3 install --break-system-packages aider-install && aider-install
 
 # Install Kimi Code
 RUN curl -L code.kimi.com/install.sh | bash
