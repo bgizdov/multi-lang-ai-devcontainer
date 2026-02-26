@@ -42,42 +42,17 @@ ARG USER_GID=$USER_UID
 # Set the default shell to bash
 SHELL ["/bin/bash", "-c"]
 
-# Install Node.js (needed for npm before devcontainer features apply)
+# Install Node.js (mandatory dependency)
 RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - && \
     apt-get install -y nodejs && \
     rm -rf /var/lib/apt/lists/*
 
-# Install AI tools globally
-RUN npm install -g @anthropic-ai/claude-code && \
-    npm install -g @augmentcode/auggie && \
-    npm install -g @google/gemini-cli && \
-    npm install -g opencode-ai && \
-    npm install -g @kilocode/cli && \
-    npm install -g ngrok && \
-    npm install -g @openai/codex && \
-    npm install -g cline && \
-    npm install -g @charmland/crush && \
-    npm install -g @qwen-code/qwen-code && \
-    npm install -g happy-coder
-
-# Install Python
+# Install Python (mandatory dependency)
 RUN apt-get update && apt-get install -y python3 python3-pip python3-venv && rm -rf /var/lib/apt/lists/*
 
-# Install Python AI tools
-RUN pip3 install --break-system-packages vicoa
-RUN pip3 install --break-system-packages aider-install && aider-install
-
-# Install Kimi Code
-RUN curl -L code.kimi.com/install.sh | bash
-
-# Install Kiro CLI
-RUN curl -fsSL https://desktop-release.q.us-east-1.amazonaws.com/latest/kiro-cli-linux.tar.gz -o /tmp/kiro.tar.gz && \
-    tar -xzf /tmp/kiro.tar.gz -C /usr/local/bin && \
-    chmod +x /usr/local/bin/kiro-cli /usr/local/bin/kiro-cli-chat /usr/local/bin/kiro-cli-term && \
-    rm -f /tmp/kiro.tar.gz
-
-# Install Plandex
-RUN curl -sL https://plandex.ai/install.sh | bash
+# Run AI tools installation script
+COPY install-tools.sh /tmp/
+RUN chmod +x /tmp/install-tools.sh && /tmp/install-tools.sh
 
 
 
