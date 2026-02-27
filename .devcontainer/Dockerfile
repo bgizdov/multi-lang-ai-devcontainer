@@ -50,9 +50,17 @@ RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - && \
 # Install Python (mandatory dependency)
 RUN apt-get update && apt-get install -y python3 python3-pip python3-venv && rm -rf /var/lib/apt/lists/*
 
+# Install uv
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+ENV PATH="/root/.local/bin:$PATH"
+
 # Run AI tools installation script
-COPY install-tools.sh /tmp/
-RUN chmod +x /tmp/install-tools.sh && /tmp/install-tools.sh
+COPY install-tools.sh /root
+RUN chmod +x /root/install-tools.sh && CI=true /root/install-tools.sh && \
+    cp -f /root/.local/bin/* /usr/local/bin/ 2>/dev/null || true && \
+    cp -r /root/.local/share /usr/local/ 2>/dev/null || true && \
+    cp -r /usr/local/lib/node_modules /usr/local/ 2>/dev/null || true && \
+    chown -R ${USERNAME}:${USERNAME} /usr/local/bin /usr/local/share /usr/local/lib/node_modules
 
 
 
@@ -60,7 +68,7 @@ RUN chmod +x /tmp/install-tools.sh && /tmp/install-tools.sh
 USER ${USERNAME}
 
 # Set working directory
-WORKDIR /workspaces/devcontainer
+WORKDIR /workspaces
 
 # Default command
 CMD ["/bin/bash"]

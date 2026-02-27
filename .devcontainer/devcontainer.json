@@ -1,8 +1,8 @@
 {
 	"name": "Java Development Container",
 	"dockerComposeFile": "docker-compose.yml",
-	"service": "devcontainer-work",
-	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"service": "devcontainer",
+	//"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 
 	// Features to add to the dev container. More info: https://containers.dev/features
 	"features": {

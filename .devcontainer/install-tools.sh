@@ -1,4 +1,11 @@
 #!/bin/bash
+set -e
+
+export PATH="$HOME/.local/bin:$PATH:/usr/local/bin"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+npm config set prefix /usr/local
 
 echo ""
 echo "=========================================="
@@ -10,7 +17,7 @@ install_or_update_npm_tool() {
     local name=$1
     local package=$2
     echo "Installing/updating $name..."
-    npm update -g $package 2>&1 | grep -v "npm WARN" || npm install -g $package 2>&1 | grep -v "npm WARN"
+    npm install -g $package
     echo "✓ $name done"
 }
 
@@ -18,7 +25,8 @@ echo "Installing/updating npm tools..."
 echo ""
 
 echo "Installing/updating Claude Code..."
-curl -fsSL https://claude.ai/install.sh | bash 2>&1 | grep -v "curl"
+export PATH="$HOME/.local/bin:$PATH"
+curl -fsSL https://claude.ai/install.sh | bash
 echo "✓ Claude Code done"
 echo ""
 install_or_update_npm_tool "Auggie CLI" "@augmentcode/auggie"
@@ -43,22 +51,26 @@ install_or_update_npm_tool "Happy Coder" "happy-coder"
 
 echo ""
 echo "Installing/updating Python AI tools..."
-pip install vicoa --upgrade 2>&1 | grep -v "WARNING" || pip install vicoa 2>&1 | grep -v "WARNING"
+export PATH="$HOME/.local/bin:$PATH"
+pip3 install vicoa --upgrade --break-system-packages
 echo "✓ Vicoa done"
 
 echo ""
 echo "Installing/updating Aider..."
-python -m pip install aider-install 2>&1 | grep -v "WARNING" && aider-install 2>&1 | grep -v "WARNING"
+export PATH="$HOME/.local/bin:$PATH"
+curl -LsSf https://aider.chat/install.sh | sh
 echo "✓ Aider done"
 
 echo ""
 echo "Installing/updating Kimi Code..."
-curl -L code.kimi.com/install.sh | bash 2>&1 | grep -v "curl"
+export PATH="$HOME/.local/bin:$PATH"
+curl -L code.kimi.com/install.sh | bash
 echo "✓ Kimi Code done"
 
 echo ""
 echo "Installing/updating Kiro CLI..."
-if [ ! -f ~/.local/bin/kiro-cli ]; then
+export PATH="$HOME/.local/bin:$PATH"
+if [ ! -firo-cli ]; then ~/.local/bin/k
     curl -fsSL https://desktop-release.q.us-east-1.amazonaws.com/latest/kiro-cli-linux.tar.gz -o /tmp/kiro.tar.gz && \
     tar -xzf /tmp/kiro.tar.gz -C ~/.local/bin && \
     chmod +x ~/.local/bin/kiro-cli ~/.local/bin/kiro-cli-chat ~/.local/bin/kiro-cli-term && \
@@ -68,33 +80,24 @@ echo "✓ Kiro CLI done"
 
 echo ""
 echo "Installing/updating Plandex..."
-curl -sL https://plandex.ai/install.sh | bash 2>&1 | grep -v "curl"
+export PATH="$HOME/.local/bin:$PATH"
+curl -sL https://plandex.ai/install.sh | bash
 echo "✓ Plandex done"
 
 echo ""
 echo "=========================================="
-echo "Verification"
+echo "Complete!"
 echo "=========================================="
 echo ""
 
-echo "Languages:"
-echo -n "Java: "
-java -version 2>&1 | head -1
-echo -n "Node.js: "
-node --version
-echo -n "Python: "
-python --version
-
-echo ""
-echo "AI Tools:"
-
+echo "AI Tools verification:"
 verify_tool() {
     local name=$1
     local cmd=$2
     if command -v $cmd &> /dev/null; then
-        echo "✓ $name: installed"
+        echo "✓ $name"
     else
-        echo "✗ $name: not found"
+        echo "✗ $name"
     fi
 }
 
@@ -113,15 +116,5 @@ verify_tool "Cline" "cline"
 verify_tool "Crush" "crush"
 verify_tool "Qwen Code" "qwen"
 verify_tool "Happy Coder" "happy"
-
-echo ""
-echo "Tunneling Tools:"
-
 verify_tool "ngrok" "ngrok"
 verify_tool "cloudflared" "cloudflared"
-
-echo ""
-echo "=========================================="
-echo "Complete!"
-echo "=========================================="
-echo ""

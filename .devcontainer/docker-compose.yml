@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  devcontainer-work:
+  devcontainer:
     build:
       context: .
       dockerfile: Dockerfile
@@ -11,7 +11,6 @@ services:
       - ..:/workspaces/${localWorkspaceFolderBasename}:cached
       # Mount additional projects directory
       - ~/projects:/projects
-      - ~/myprojects:/myprojects
     
     # Overrides default command so things don't shut down after the process ends.
     command: /bin/sh -c "while sleep 1000; do :; done"
